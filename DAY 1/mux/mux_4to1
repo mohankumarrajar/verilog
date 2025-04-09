@@ -1,0 +1,8 @@
+module mux4to1 (
+    input in0, in1, in2, in3,  
+    input a, b,                
+    output y                   
+);
+    assign y = (~b & ~a & in0) | (~b & a & in1) | (b & ~a & in2) |(b & a & in3);
+
+endmodule
