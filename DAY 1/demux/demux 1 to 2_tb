@@ -1,0 +1,40 @@
+`timescale 1ns/1ps
+
+module demux1to2_tb;
+    reg in;
+    reg a;
+    wire [1:0] y;
+
+
+    demux1to2 DUT (
+        .in(in),
+        .a(a),
+        .y(y)
+    );
+
+    initial begin
+    
+        $dumpfile("demux1to2.vcd");
+        $dumpvars(0, demux1to2_tb);
+        
+        in = 0; a = 0; #10;
+        $display("in = %b, a = %b, y = %b", in, a, y);
+        
+        in = 0; a = 1; #10;
+        $display("in = %b, a = %b, y = %b", in, a, y);
+        
+       
+        in = 1; a = 0; #10;
+        $display("in = %b, a = %b, y = %b", in, a, y);
+        
+        in = 1; a = 1; #10;
+        $display("in = %b, a = %b, y = %b", in, a, y);
+      
+        #10 $finish;
+    end
+      initial begin
+        $monitor("Time = %0t, in = %b, a = %b, y = %b", 
+                 $time, in, a, y);
+    end
+
+endmodule
