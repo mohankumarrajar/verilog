@@ -1,0 +1,13 @@
+
+module demux1to4 (
+    input wire data_in,    
+    input wire [1:0] sel,   
+    output wire [3:0] y     
+);
+
+    assign y[0] = (sel == 2'b00) ? data_in : 1'b0;
+    assign y[1] = (sel == 2'b01) ? data_in : 1'b0;
+    assign y[2] = (sel == 2'b10) ? data_in : 1'b0;
+    assign y[3] = (sel == 2'b11) ? data_in : 1'b0;
+
+endmodule
