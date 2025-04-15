@@ -1,0 +1,24 @@
+module tb_decoder_2to4_dataflow;
+    reg [1:0] in;
+    reg en;
+    wire [3:0] out;
+    decoder_2to4_dataflow dut (
+        .in(in),
+        .en(en),
+        .out(out)
+    );
+        initial begin
+    
+        $dumpfile("decoder_dataflow.vcd");
+        $dumpvars(0, tb_decoder_2to4_dataflow);
+        en = 0; in = 2'b00; #10;
+        en = 1; in = 2'b00; #10;
+        en = 1; in = 2'b01; #10;
+        en = 1; in = 2'b10; #10;
+        en = 1; in = 2'b11; #10;
+        en = 0; in = 2'b11; #10;
+        $display("Dataflow model simulation complete");
+        $finish;
+    end
+ endmodule
+endmodule
