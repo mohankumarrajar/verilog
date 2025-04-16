@@ -21,7 +21,7 @@ module btog (dout,din);
                   13:dout=11;
                   14:dout=9;
                   15:dout=8;
-           default:dout=4'0000;                                                                                          
+           default:dout=4'xxxx;                                                                                          
           endcase
    end
    endmodule                                                                                                            ~               
