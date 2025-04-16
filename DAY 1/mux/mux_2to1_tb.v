@@ -1,28 +1,23 @@
-`timescale 1ns/1ps
+module mux2to1_tb;
+        reg a,b,s0;
+        wire y;
+ mux_2to1 uut(
+         .a(a),.b(b),.s0(s0),.y(y)
+ );
+ initial begin
+         $dumpfile("mux.vcd");
+         $dumpvars();
 
-module tb_mux_2to1;
-    reg A, B, sel;
-    wire Y;
-    mux_2to1 uut (
-        .A(A),
-        .B(B),
-        .sel(sel),
-        .Y(Y)
-    );
+         $monitor($time,"a=%b,b=%b,s0=%b,y=%b",a,b,s0,y);
 
-    initial begin
-  
-        $dumpfile("mux_2to1.vcd");
-        $dumpvars(0, tb_mux_2to1);
-        A = 0; B = 0; sel = 0; #10;
-        A = 0; B = 1; sel = 0; #10;
-        A = 1; B = 0; sel = 0; #10;
-        A = 1; B = 1; sel = 0; #10;
-        A = 0; B = 0; sel = 1; #10;
-        A = 0; B = 1; sel = 1; #10;
-        A = 1; B = 0; sel = 1; #10;
-        A = 1; B = 1; sel = 1; #10;
+         #5 s0=0;a=0;b=0;
+         #5 s0=0;a=0;b=1;
+         #5 s0=0;a=1;b=0;
+         #5 s0=0;a=1;b=1;
+         #5 s0=1;a=0;b=0;
+         #5 s0=1;a=0;b=1;
+         #5 s0=1;a=1;b=0;
+         #5 s0=1;a=1;b=1;
 
-        $finish;
-    end
-endmodule
+ end
+ endmodule
