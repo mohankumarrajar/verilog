@@ -1,19 +1,15 @@
-module tb_half_subtractor;
-    reg A, B;
-    wire D, B_out;
-    half_subtractor hs (
-        .A(A), .B(B),
-        .D(D), .B_out(B_out)
-    );
-
-    initial begin
-        $dumpfile("half_subtractor.vcd");  
-        $dumpvars(0, tb_half_subtractor);
-        A = 0; B = 0; #10;
-        A = 0; B = 1; #10;
-        A = 1; B = 0; #10;
-        A = 1; B = 1; #10;
-
-        $finish;
-    end
+module half_subtractor_tb;
+reg a,b;
+wire diff,bor;
+    half_subtractor v(.a(a),.b(b),.diff(diff),.bor(bor));
+initial begin
+    $dumpfile("half_subtractor.vcd");
+$dumpvars;
+    $monitor($time,"a=%b,b=%b,diff=%b,bor=%b",a,b,diff,bor);
+a=0;b=0;
+#5a=0;b=0;
+#5a=0;b=1;
+#5a=1;b=0;
+#5a=1;b=1;
+end
 endmodule
