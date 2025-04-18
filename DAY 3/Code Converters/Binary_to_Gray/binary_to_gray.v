@@ -1,27 +1,15 @@
-module btog (dout,din);
-        input[3:0]din;
-        output[3:0]dout;
-        reg[3:0]dout;
-  always@(din)
-  begin
-          case(din)
-                  0:dout=0; 
-                  1:dout=1;                                                                                                            
-                  2:dout=3;            
-                  3:dout=2;
-                  4:dout=6;
-                  5:dout=7;
-                  6:dout=5;
-                  7:dout=4;
-                  8:dout=12;
-                  9:dout=13;
-                  10:dout=15;
-                  11:dout=14;
-                  12:dout=10;
-                  13:dout=11;
-                  14:dout=9;
-                  15:dout=8;
-           default:dout=4'xxxx;                                                                                          
-          endcase
-   end
-   endmodule                                                                                                            ~               
+module bintogray_tb;
+        parameter n=4;
+        reg[n-1:0]bin;
+        wire [n-1:0]gray;
+
+  bintogray bintogray(.bin(bin),.gray(gray));
+  initial begin
+          $dumpfile("bintogray.vcd");
+          $dumpvars();
+          $monitor($time,"bin=%b,gray=%b",bin,gray);
+
+          #5 bin=4'b0010;
+          #5 bin=4'b0100;
+  end
+  endmodule                                                                                                         ~               
