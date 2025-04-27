@@ -7,8 +7,7 @@ module d_latch_tb;
     );
 
         initial begin
-        d = 0;
-
+        
            $dumpfile("d_latch_tb.vcd");
         $dumpvars();
 
