@@ -1,38 +1,20 @@
-module sr_latch_tb;
-    reg S,R;
-    wire Q,Q_bar;
+module sr_tb;
+        reg s,r;
+        wire q,qb;
 
-    sr_latch uut (.S(S),.R(R),.Q(Q),.Q_bar(Q_bar) );
+  srl uut(.s(s),.r(r),.q(q),.qb(qb));
 
+        initial begin
+                $dumpfile("srl.vcd");
+                $dumpvars();
 
-    initial begin
+                $monitor($time,"s=%b,r=%b,q=%b,qb=%b",s,r,q,qb);
 
-        $dumpfile("sr_latch.vcd");
-        $dumpvars(1);
+                s=0;r=1;
+                #5 s=0;r=0;
+                #5 s=0;r=1;
+                #5 s=1;r=0;
+                #5 s=1;r=1;
 
-        $monitor("Time = %0d, S = %b, R = %b, Q = %b, Q_bar = %b", $time, S, R, Q, Q_bar);
-
-
-       #10;
-            S = 1; R = 0;
-        #10;
-            S = 0; R = 0;
-        #10;
-            S = 0; R = 1;
-        #10;
-            S = 0; R = 0;
-        #10;
-            S = 1; R = 1;
-        #10;
-            S = 0; R = 0;
-        #10;
-            S = 1; R = 0;
-        #10;
-        S = 0; R = 0;
-        #10;
-        S = 0; R = 1;
-        #10;
-
-       end
-
-endmodule
+        end
+        endmodule
