@@ -1,0 +1,29 @@
+module sipo_tb;
+reg si,clk,clr;
+wire [3:0]po;
+
+sipo uut(
+        .si(si),.clk(clk),.clr(clr),.po(po));
+
+initial begin
+        $dumpfile("a.vcd");
+        $dumpvars();
+end
+initial begin
+        clk=1;
+        forever #5 clk=~clk;
+end
+initial begin
+        $monitor($time,"si=%b,clk=%b,clr=%b,po=%po",si,clk,clr,po);
+
+        clr=1;
+        si=0;
+
+        si=1;#5;
+        si=1;#5;
+        si=1;#5;
+        si=0;#5;
+
+        $finish;
+end
+endmodule
