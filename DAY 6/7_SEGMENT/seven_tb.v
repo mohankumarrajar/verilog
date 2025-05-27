@@ -1,4 +1,4 @@
-module alu_tb;
+module seven_tb;
 reg [3:0]bcd;
 wire[6:0]led;
 integer i;
