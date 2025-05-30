@@ -1,4 +1,4 @@
-module moore_11011(
+module moore_10001(
         input in,clk,rst,
         output out);
 
@@ -22,10 +22,10 @@ end
 always @ (*)begin
 case (state)
 a : next_state = in ? b : a;
-b : next_state = in ? c : a;
-c : next_state = in ? c : d;
-d : next_state = in ? e : a;
-e : next_state = in ? f : a;
+b : next_state = in ? b : c;
+c : next_state = in ? b : d;
+d : next_state = in ? b : e;
+e : next_state = in ? a : f;
 f : next_state = in ? b : a;
 default : next_state = a;
 endcase
