@@ -1,5 +1,6 @@
  Write RTL code to design a 3-bit SISO right shift register using only a Non-blocking assignment. (Do not use any operators).
 
+ANSWER : 
 module siso(
         input clk,si,rst,
         output reg so);
