@@ -1,0 +1,30 @@
+ What will be the output of the following code and if it is wrong then what will be thecorrect code?
+
+begin
+fork begin
+initial
+for (bit[2:0] i=0;i<=3;i++)
+$display($time,”value of i=%0d”,i);
+end
+begin
+#1
+;
+$display(“Executed 2nd begin block”);
+end
+join
+$display(“Fork Join Ended”);
+
+end
+ANSWER : 
+
+initial begin
+    for (int i=0;i<=3;i++)
+      $display($time,"value of i=%0d",i);
+  end
+  initial begin
+    #1;
+    $display("Executed 2nd begin block");
+  end
+join
+$display("Fork Join Ended");
+
