@@ -10,4 +10,4 @@ y3 = y2;
 end
 
 
-ANSWER : 1 - DFF 
+ANSWER : 1 - DFF because this three assignment statements can be written as y3=y2=y1=din => y3=din.
