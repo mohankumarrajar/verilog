@@ -1,0 +1,17 @@
+For the below RTL schematic write the RTL snippet
+ANSWER : 
+module seq_logic(
+    input wire clk,
+    input wire x1,
+    input wire x2,
+    input wire x3,
+    output reg f,
+    output reg g
+);
+
+always @(posedge clk) begin
+    f <= x1 & x2;
+    g <= x3 | f;
+end
+
+endmodule
