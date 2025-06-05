@@ -1,0 +1,17 @@
+Write RTL code for designing an 8:1 mux using a for loop.
+
+ANSWER : 
+module mux8to1 (
+    input  [7:0] in,      // 8 input lines
+    input  [2:0] sel,     // 3-bit select line (0 to 7)
+    output reg out        // Output
+);
+    integer i;
+    always @(*) begin
+        out = 0; // default
+        for (i = 0; i < 8; i = i + 1) begin
+            if (sel == i)
+                out = in[i];
+        end
+    end
+endmodule
