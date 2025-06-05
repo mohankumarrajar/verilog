@@ -1,0 +1,16 @@
+Which of the statements will execute from the below snippet & justify the behavior?
+
+reg c = 3’b00x;
+always@(*)
+begin
+casex( c )
+3’b000:st1;
+3’b100:st2;
+3’b001:st3;
+
+endcase
+end
+
+
+ANSWER : st1 is executed
+Because casex treats x in the value and case items as "don’t care", 3'b00x matches both 3'b000 and 3'b001, but 3'b000 appears first — so st1 is executed.
