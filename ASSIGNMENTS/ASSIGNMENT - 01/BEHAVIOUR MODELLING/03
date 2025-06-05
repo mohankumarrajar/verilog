@@ -1,2 +1,20 @@
  Write RTL code to design a 3-bit SISO right shift register using only a Non-blocking assignment. (Do not use any operators).
 
+module siso(
+        input clk,si,rst,
+        output reg so);
+reg s0,s1,s2;
+
+always@(posedge clk)begin
+
+        if (rst)begin
+                so<=0;
+        end
+        else begin
+                s0<=si;
+                s1<=s0;
+                s2<=s1;
+                so<=s2;
+        end
+end
+endmodule
