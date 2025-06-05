@@ -1,14 +1,5 @@
- Which of the statements will execute from the below snippet & justify the behavior?
+Write a Verilog code to generate 20 odd or even values using a function.
 
-reg c = 3’b00x;
-always@(*)
-begin
-casex( c )
-3’b000:st1;
-3’b100:st2;
-3’b001:st3;
+ANSWER : 
 
-endcase
-end
 
-ANSWER : st1
