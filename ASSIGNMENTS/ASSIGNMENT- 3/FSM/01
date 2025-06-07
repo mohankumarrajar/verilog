@@ -1,0 +1,45 @@
+1. Design a finite state machine that has an input x and output y. The output should
+be asserted whenever x = 1 or x = 0 for three consecutive clock pulses. In other
+words, the FSM should detect the sequences 111 or 000. Overlapping sequences
+are allowed, so a sequence of four or five 0s or 1s should also output 1.
+
+ANSWER : 
+
+module mealay_111( 
+    input in,
+    input clk,
+    input rst,
+    output out
+);
+
+    parameter a = 3'd1;
+    parameter b = 3'd2;
+    parameter c = 3'd3;
+
+    reg [2:0] state, next_state;
+    reg y;
+
+    assign out = y;
+
+
+    always @(posedge clk or negedge rst) begin
+        if (!rst)
+            state <= a;
+        else
+            state <= next_state;
+    end
+
+    always @(*) begin
+        case (state)
+            a: next_state = in ? b : a;
+            b: next_state = in ? c : a;
+            c: next_state = in ? b : a;
+            default: next_state = a;
+        endcase
+    end
+
+    always @(*) begin
+        y = (state == c && in == 1);
+    end
+
+endmodule
