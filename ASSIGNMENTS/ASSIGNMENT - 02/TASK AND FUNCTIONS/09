@@ -2,24 +2,26 @@ Write Verilog code where a task can call both a task and a function.
 
 ANSWER : 
 
-module task_calls;
-  function [7:0] square;
+module simple;
+
+  reg [7:0] number;
+  reg [7:0] result;
+  function [7:0] double;
     input [7:0] x;
-    square = x * x;
+    begin
+      double = x * 2;
+    end
   endfunction
-
-  task process;
-    input [7:0] val;
-    reg [7:0] sq;
+  task show_result;
+    input [7:0] value;
     begin
-      sq = square(val);
-      $display("Square = %d", sq);
-      display_message();
+      $display("Result is: %d", value);
     end
   endtask
+  initial begin
+    number = 6;
+    result = double(number);   // Call function
+    show_result(result);       // Call task
+  end
 
-  task display_message;
-    begin
-      $display("Task called inside another task");
-    end
-  endtask
+endmodule
