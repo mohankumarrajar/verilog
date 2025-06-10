@@ -4,18 +4,18 @@ ANSWER :
 
 AUTO:
 
-task  auto_task;
+task  automatic;
     input [7:0] x;
-    initial begin
+    begin
         $display("auto task: %0d", x);
     end
 endtask
 
 NON AUTO:
 
-task non_auto_task;
+task non_automatic;
     input [7:0] x;
-    initial begin
+     begin
         $display("non-auto task: %0d", x);
     end
 endtask
