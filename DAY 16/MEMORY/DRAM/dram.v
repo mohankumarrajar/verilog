@@ -1,4 +1,4 @@
-module d #(
+module dram #(
         parameter addr_width=8,
         parameter data_width=16)(
         input wire clk,
