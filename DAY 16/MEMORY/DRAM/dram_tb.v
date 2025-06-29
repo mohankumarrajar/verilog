@@ -1,4 +1,4 @@
-module d_tb;
+module dram_tb;
 
     reg clk;
     reg [7:0] addr_a, addr_b;
@@ -8,7 +8,7 @@ module d_tb;
     wire [15:0] read_data_a, read_data_b;
 
 
-    d #(
+    dram #(
         .addr_width(8),
         .data_width(16)
     ) dut (
