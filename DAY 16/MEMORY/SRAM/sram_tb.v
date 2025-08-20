@@ -1,60 +1,51 @@
-module sram_tb;
+
+module tb_sram;
+
     reg clk;
-    reg reset;
-    reg [7:0] addr;
-    reg [15:0] write_data;
-    reg write_en;
-    reg read_en;
-    wire [15:0] read_data;
+    reg rs;
+    reg wr;
+    reg [3:0] din;
+    reg [2:0] add;
+    wire [3:0] dout;
 
-
-    sram dut (
+    sram uut (
         .clk(clk),
-        .reset(reset),
-        .addr(addr),
-        .write_data(write_data),
-        .write_en(write_en),
-        .read_en(read_en),
-        .read_data(read_data)
+        .rs(rs),
+        .wr(wr),
+        .din(din),
+        .add(add),
+        .dout(dout)
     );
 
-
-    initial clk = 0;
     always #5 clk = ~clk;
 
-
     initial begin
+        clk = 0;
+        rs = 1; wr = 0; din = 0; add = 0;
 
-        reset = 1;
-        addr = 0;
-        write_data = 0;
-        write_en = 0;
-        read_en = 0;
-       #10 reset = 0;
+        #10 rs = 0;
 
+        #10 wr = 1; din = 4'b1010; add = 3'b000;
+        #10 wr = 1; din = 4'b1100; add = 3'b001;
+        #10 wr = 1; din = 4'b1111; add = 3'b010;
 
-        #10 addr = 5; write_data = 16'hABCD; write_en = 1;
-        #10 write_en = 0;
+        #10 wr = 0; add = 3'b000;
+        #10 wr = 0; add = 3'b001;
+        #10 wr = 0; add = 3'b010;
 
-
-        #10 addr = 5; read_en = 1;
-        #10 read_en = 0;
-
-
-        #10 addr = 10; write_data = 16'h1234; write_en = 1;
-        #10 write_en = 0;
-
-
-        #10 addr = 10; read_en = 1;
-        #10 read_en = 0;
+        #10 wr = 1; din = 4'b0011; add = 3'b011;
+        #10 wr = 0; add = 3'b011;
 
         #20 $finish;
     end
 
-
     initial begin
-        $monitor("Time=%0t reset=%b addr=%h write_data=%h write_en=%b read_en=%b read_data=%h",
-                 $time, reset, addr, write_data, write_en, read_en, read_data);
+        $monitor("Time=%0t | wr=%b | add=%b | din=%b | dout=%b",
+                 $time, wr, add, din, dout);
     end
+  initial begin
+    $dumpfile("dump.vcd");
+    $dumpvars();
+  end
+
 endmodule
-                 
