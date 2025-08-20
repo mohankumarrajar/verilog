@@ -1,29 +1,27 @@
-module sram #(
-    parameter addr_width = 8,
-    parameter data_width = 16
-)(
-    input wire clk,
-    input wire reset,
-    input wire [addr_width-1:0] addr,
-    input wire [data_width-1:0] write_data,
-    input wire write_en,
-    input wire read_en,
-    output reg [data_width-1:0] read_data
+module sram(
+    input clk,
+    input rst,      
+    input wr,       
+    input [3:0] din,
+    input [2:0] add,
+    output reg [3:0] dout
 );
 
-    reg [data_width-1:0] mem [0:(1<<addr_width)-1];
+   
+    reg [3:0] ram [7:0];
+    integer i;
 
-    always @(posedge clk or posedge reset) begin
-        if (reset) begin
-            read_data <= 0;
+    always @(posedge clk) begin
+        if (rst) begin
+            dout <= 4'b0000;
+            for (i = 0; i < 8; i = i + 1)
+                ram[i] <= 4'b0000;  
+        end
+        else if (wr) begin
+            ram[add] <= din;       
         end
         else begin
-            if (write_en) begin
-                mem[addr] <= write_data;
-            end
-            if (read_en) begin
-                read_data <= mem[addr];
-            end
+            dout <= ram[add];       
         end
     end
 endmodule
